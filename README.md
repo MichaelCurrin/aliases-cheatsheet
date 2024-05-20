@@ -19,13 +19,8 @@ alias l='ls -C -F'
 
 # Show hidden.
 alias la='ls -A'
-# With types.
-alias la1='la -F -1'
 
-# Human-readable.
-alias ll='ls -l -h'
-# Hidden, with types.
-alias lal='ll -A -F'
+# ...
 ```
 
 You can turn those into a searchable webpage that looks like this:
