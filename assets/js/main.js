@@ -60,8 +60,7 @@ function App() {
           </tr>
         </thead>
         <tbody>
-          ${filteredAliases.map(
-            (alias, index) => html`
+          ${filteredAliases.map((alias, index) => html`
               <tr key=${index}>
                 <td className="monospaced alias-column">${alias.alias}</td>
                 <td className="monospaced definition-column">
@@ -69,8 +68,7 @@ function App() {
                 </td>
                 <td>${alias.comment}</td>
               </tr>
-            `,
-          )}
+            `)}
         </tbody>
       </table>
     </div>
