@@ -44,8 +44,6 @@ def save_aliases_to_json(aliases, output_file):
 
 
 def main():
-    # TODO make configurable as argument, and check for a few known paths
-    # or multiple.
     home_directory = Path.home()
 
     aliases_file = home_directory / ".aliases"
