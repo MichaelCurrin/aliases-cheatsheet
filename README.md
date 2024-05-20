@@ -1,30 +1,27 @@
 # Personal Aliases Cheatsheet
 > Make your Bash and Git aliases easy to view and search
 
-
-## Installation
-
-Clone the repo.
-
-Install Python.
+[![GitHub tag](https://img.shields.io/github/tag/MichaelCurrin/aliases-cheatsheet?include_prereleases=&sort=semver&color=blue)](https://github.com/MichaelCurrin/aliases-cheatsheet/releases/)
+[![License](https://img.shields.io/badge/License-MIT-blue)](#license)
 
 
-## Usage
+## Sample
 
-### Prepare your aliases data
+<div align="center">
 
-Do this whenever you want to pull in the latest changes to your aliases.
+![Sample screenshot](/sample.png)
+
+</div>
 
 
-### Start server
+## Documentation
 
-Use VS Code's extensions for live servers.
+<div align="center">
 
-Or start a Python or Node server in the console.
+[![view - Documentation](https://img.shields.io/badge/view-Documentation-blue?style=for-the-badge)](/docs/ "Go to project documentation")
 
-Then open the webapp in your browser.
-
+</div>
 
 ## License
 
-Licensed under [MIT](/LICENSE) by [MichaelCurrin](https://github.com/MichaelCurrin).
+Released under [MIT](/LICENSE) by [@MichaelCurrin](https://github.com/MichaelCurrin).
