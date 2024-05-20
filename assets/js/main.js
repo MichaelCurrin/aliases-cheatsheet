@@ -1,6 +1,6 @@
 import htm from "https://dev.jspm.io/htm@3.1.1";
-import React, { useState, useEffect } from "https://dev.jspm.io/react@18.2.0";
 import ReactDOM from "https://dev.jspm.io/react-dom@18.2.0";
+import React, { useEffect, useState } from "https://dev.jspm.io/react@18.2.0";
 
 const html = htm.bind(React.createElement);
 
@@ -35,7 +35,7 @@ function App() {
   const filteredAliases = aliases.filter(
     (alias) =>
       alias.alias.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      alias.definition.toLowerCase().includes(searchQuery.toLowerCase())
+      alias.definition.toLowerCase().includes(searchQuery.toLowerCase()),
   );
 
   return html`
@@ -60,13 +60,17 @@ function App() {
           </tr>
         </thead>
         <tbody>
-          ${filteredAliases.map((alias, index) => html`
-            <tr key=${index}>
-              <td className="monospaced alias-column">${alias.alias}</td>
-              <td className="monospaced definition-column">${alias.definition}</td>
-              <td>${alias.comment}</td>
-            </tr>
-          `)}
+          ${filteredAliases.map(
+            (alias, index) => html`
+              <tr key=${index}>
+                <td className="monospaced alias-column">${alias.alias}</td>
+                <td className="monospaced definition-column">
+                  ${alias.definition}
+                </td>
+                <td>${alias.comment}</td>
+              </tr>
+            `,
+          )}
         </tbody>
       </table>
     </div>
