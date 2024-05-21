@@ -1,8 +1,13 @@
+"""
+Parse aliases module.
+"""
+
 import json
 from pathlib import Path
 
 APP_DIR = Path(__file__).parent
-JSON_PATH = APP_DIR / "assets" / "data" / "aliases.json"
+JSON_NAME = "aliases.json"
+JSON_PATH = APP_DIR / "www" / "assets" / "data" / JSON_NAME
 
 
 def parse_bash_aliases(file_path):
