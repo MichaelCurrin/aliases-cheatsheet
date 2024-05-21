@@ -5,9 +5,7 @@ Parse aliases module.
 import json
 from pathlib import Path
 
-APP_DIR = Path(__file__).parent
-JSON_NAME = "aliases.json"
-JSON_PATH = APP_DIR / "www" / "assets" / "data" / JSON_NAME
+from .config import JSON_PATH
 
 
 def parse_bash_aliases(file_path):
@@ -26,7 +24,7 @@ def parse_bash_aliases(file_path):
 
             alias_name = parts[0].split()[1]
             alias_definition = parts[1].strip("'")
-            comment = "\n".join(comment_lines) if comment_lines else None
+            comment = "\n".join(comment_lines) if comment_lines else ""
 
             aliases.append(
                 {
