@@ -84,6 +84,9 @@ def curses_app(stdscr) -> None:
                 value = table_str[i + cursor_pos + header_lines][:width]
                 stdscr.addstr(i + 2 + header_lines, 0, value)
 
+        # Move the cursor to the end of the filter input field
+        stdscr.move(0, len("Filter: " + query))
+
         stdscr.refresh()
         key = stdscr.getch()
 
