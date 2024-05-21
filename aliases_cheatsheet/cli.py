@@ -1,7 +1,9 @@
 import json
+
 from prettytable import PrettyTable
 
 from .config import JSON_PATH
+
 
 json_file_path = JSON_PATH
 
