@@ -15,7 +15,6 @@ with open(json_file_path, "r") as file:
     data = json.load(file)
 
 
-# Function to create a PrettyTable with filtered data
 def create_table(data, query, max_width=20):
     table = PrettyTable()
     if data and isinstance(data, list):
@@ -33,7 +32,6 @@ def create_table(data, query, max_width=20):
     return table
 
 
-# Function to run the curses application
 def curses_app(stdscr):
     curses.curs_set(1)
     stdscr.nodelay(1)
@@ -41,12 +39,14 @@ def curses_app(stdscr):
 
     query = ""
     cursor_pos = 0  # Initialize cursor position
+
     while True:
         stdscr.clear()
         height, width = stdscr.getmaxyx()
         stdscr.addstr(0, 0, "Filter: " + query[: width - 8])
 
-        table = create_table(data, query, max_width=(width // len(data[0].keys())) - 2)
+        max_width = width // len(data[0].keys())
+        table = create_table(data, query, max_width=(max_width - 2))
         table_str = str(table).split("\n")
 
         # Display the headers always
@@ -58,23 +58,19 @@ def curses_app(stdscr):
         display_lines = height - 3 - header_lines
 
         # Ensure cursor position is within valid range
-        cursor_pos = max(
-            0, min(cursor_pos, len(table_str) - header_lines - display_lines)
-        )
+        total_height = len(table_str) - header_lines - display_lines
+        cursor_pos = max(0, min(cursor_pos, total_height))
 
         # Display the table content within the screen bounds, below the headers
         for i in range(display_lines):
             if i + cursor_pos + header_lines < len(table_str):
-                stdscr.addstr(
-                    i + 2 + header_lines,
-                    0,
-                    table_str[i + cursor_pos + header_lines][:width],
-                )
+                value = table_str[i + cursor_pos + header_lines][:width]
+                stdscr.addstr(i + 2 + header_lines, 0, value)
 
         stdscr.refresh()
         key = stdscr.getch()
 
-        if key == curses.KEY_BACKSPACE or key == 127:
+        if key in (curses.KEY_BACKSPACE, 127):
             query = query[:-1]
             cursor_pos = 0  # Reset cursor when filter changes
         elif key == 27:  # ESC key to exit
@@ -90,5 +86,4 @@ def curses_app(stdscr):
             cursor_pos = 0  # Reset cursor when filter changes
 
 
-# Run the curses application
 curses.wrapper(curses_app)
