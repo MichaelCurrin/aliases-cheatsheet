@@ -25,6 +25,7 @@ def create_table(
     :param data: List of dictionaries representing the data.
     :param query: Query string used for filtering.
     :param max_width: Maximum width for each column.
+
     :return: PrettyTable object containing filtered data.
     """
     table = PrettyTable()
