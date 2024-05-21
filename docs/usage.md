@@ -7,8 +7,12 @@ Do this whenever you want to pull in the latest changes to your aliases.
 
 ## 2. Start server locally
 
-Use VS Code's extensions for live servers.
+Start a Python server to serve the static assets, including the output JSON data.
 
-Or start a Python or Node server in the console.
+```sh
+$ make run
+```
 
-Then open the webapp in your browser.
+Then open the webapp in your browser:
+
+- http://localhost:8000/
