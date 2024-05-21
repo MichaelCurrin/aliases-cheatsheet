@@ -10,12 +10,23 @@ json_file_path = JSON_PATH
 
 
 # TODO add text like about, and ESC to exit
-# Read the JSON file
+# TODO handle keyboard interrupt gracefully.
+
 with open(json_file_path, "r") as file:
     data = json.load(file)
 
 
-def create_table(data, query, max_width=20):
+def create_table(
+    data: list[dict[str, str]], query: str, max_width: int = 20
+) -> PrettyTable:
+    """
+    Create a PrettyTable with filtered data.
+
+    :param data: List of dictionaries representing the data.
+    :param query: Query string used for filtering.
+    :param max_width: Maximum width for each column.
+    :return: PrettyTable object containing filtered data.
+    """
     table = PrettyTable()
     if data and isinstance(data, list):
         column_names = data[0].keys()
@@ -32,7 +43,12 @@ def create_table(data, query, max_width=20):
     return table
 
 
-def curses_app(stdscr):
+def curses_app(stdscr) -> None:
+    """
+    Curses application for real-time filtering and scrolling through data.
+
+    :param stdscr: Standard screen object provided by curses.
+    """
     curses.curs_set(1)
     stdscr.nodelay(1)
     stdscr.timeout(100)
