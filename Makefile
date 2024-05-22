@@ -3,6 +3,7 @@ APP_DIR = aliases_cheatsheet
 
 default: install install-dev
 
+
 install:
 	pip install pip --upgrade
 	pip install -r requirements.txt
@@ -19,6 +20,14 @@ fmt-check:
 	black . --diff --check
 	isort . --diff --check-only
 
+pretty:
+	npx prettier -w assets/{js,css} index.html
+
+
+parse:
+	# TODO check this approach in my template repo
+	python -m aliases_cheatsheet.parse_aliases
+	python -m aliases_cheatsheet.parse_git_config
 
 cli:
 	python -m aliases_cheatsheet.cli
@@ -29,10 +38,6 @@ cli-scroll:
 live:
 	python -m aliases_cheatsheet.live
 
-run:
-	# TODO check this approach in my template repo
-	python -m aliases_cheatsheet.parse_aliases
-	python -m aliases_cheatsheet.parse_git_config
 
 serve:
 	cd $(APP_DIR)/www && python -m http.server
