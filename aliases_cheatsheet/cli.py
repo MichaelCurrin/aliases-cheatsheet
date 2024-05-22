@@ -2,10 +2,10 @@ import json
 
 from prettytable import PrettyTable
 
-from .config import JSON_PATH
+from .config import ALIASES_JSON_PATH
 
 
-json_file_path = JSON_PATH
+json_file_path = ALIASES_JSON_PATH
 
 with open(json_file_path, "r") as file:
     aliase_data = json.load(file)
