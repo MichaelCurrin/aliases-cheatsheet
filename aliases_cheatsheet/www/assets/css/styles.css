@@ -9,14 +9,12 @@ body {
   margin: 0;
 }
 
-body>* {
+body > * {
   /* Prevent content from going to the page edge - especially on mobile.
     Note this should not be on body itself otherwise it gets white edges. */
   padding-left: 15px;
   padding-right: 15px;
 }
-
-
 
 header {
   background-color: #282c34;
@@ -56,7 +54,6 @@ button:active {
   color: white;
 }
 
-
 .container {
   max-width: 1200px;
   margin: 0 auto;
@@ -84,11 +81,11 @@ button:active {
 
 .aliases-table th {
   text-align: center;
-  background-color:  #1b5261;
+  background-color: #1b5261;
 }
 .aliases-table td {
   text-align: left;
-  background-color:  #213838;
+  background-color: #213838;
 }
 
 .alias-column {
@@ -100,7 +97,6 @@ button:active {
   font-size: larger;
   font-family: monospace;
 }
-
 
 label {
   font-weight: bold;
