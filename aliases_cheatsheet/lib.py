@@ -6,21 +6,21 @@ import json
 from pathlib import Path
 
 
-def load_json(json_file_path: Path):
-    with open(json_file_path, "r") as file:
-        data = json.load(file)
-
-    return data
-
-
-def save_aliases_to_json(aliases: dict, output_file: Path) -> None:
+def load_json(input_path: Path) -> list[dict]:
     """
-    Save parsed aliases to a JSON file.
-
-    :param aliases: Parsed aliases.
-    :param output_file: Path to the output JSON file.
+    Read a given JSON file and return as an object.
     """
-    print(f"Writing to: {output_file.name}")
+    with open(input_path, "r", encoding="utf-8") as file:
+        json_data = json.load(file)
 
-    with output_file.open("w") as json_file:
-        json.dump(aliases, json_file, indent=4)
+    return json_data
+
+
+def save_json(json_data: dict, output_path: Path) -> None:
+    """
+    Save given data to a JSON file.
+    """
+    print(f"Writing to: {output_path.name}")
+
+    with output_path.open("w") as json_file:
+        json.dump(json_data, json_file, indent=4)

@@ -1,14 +1,17 @@
-import json
+"""
+CLI module.
+
+Display and filter custom aliases in the terminal view.
+"""
 
 from prettytable import PrettyTable
+
+from . import lib
 
 from .config import ALIASES_JSON_PATH
 
 
-json_file_path = ALIASES_JSON_PATH
-
-with open(json_file_path, "r") as file:
-    aliase_data = json.load(file)
+aliases_data = lib.load_json(ALIASES_JSON_PATH)
 
 # Create an instance of PrettyTable
 table = PrettyTable()
@@ -16,19 +19,19 @@ table = PrettyTable()
 # In VS Code terminal, the width seems not respected, so set one.
 max_width = 60
 
-if not aliase_data:
+if not aliases_data:
     print("No data found")
-if not isinstance(aliase_data, list):
+if not isinstance(aliases_data, list):
     print("Data must be a list of dict objects")
 
-column_names = aliase_data[0].keys()
+column_names = aliases_data[0].keys()
 table.field_names = column_names
 
 for column in column_names:
     table.max_width[column] = max_width
     table.align[column] = "l"
 
-for item in aliase_data:
+for item in aliases_data:
     table.add_row(item.values())
 
 # Print the table

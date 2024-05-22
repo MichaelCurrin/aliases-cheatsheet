@@ -48,7 +48,7 @@ def main():
     aliases_file = home_directory / ".aliases"
 
     aliases = parse_bash_aliases(aliases_file)
-    lib.save_aliases_to_json(aliases, ALIASES_JSON_PATH)
+    lib.save_json(aliases, ALIASES_JSON_PATH)
 
 
 if __name__ == "__main__":

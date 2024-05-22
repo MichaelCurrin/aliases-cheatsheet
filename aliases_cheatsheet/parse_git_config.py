@@ -46,7 +46,7 @@ def main():
     gitconfig_file = home_directory / ".gitconfig"
 
     aliases = parse_git_aliases(gitconfig_file)
-    lib.save_aliases_to_json(aliases, GIT_ALIASES_JSON_PATH)
+    lib.save_json(aliases, GIT_ALIASES_JSON_PATH)
 
 
 if __name__ == "__main__":
