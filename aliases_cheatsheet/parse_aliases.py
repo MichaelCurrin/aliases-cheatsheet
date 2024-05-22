@@ -5,7 +5,7 @@ Parse aliases module.
 import json
 from pathlib import Path
 
-from .config import JSON_PATH
+from .config import ALIASES_JSON_PATH
 
 
 def parse_bash_aliases(file_path):
@@ -52,8 +52,8 @@ def main():
     aliases_file = home_directory / ".aliases"
 
     aliases = parse_bash_aliases(aliases_file)
-    save_aliases_to_json(aliases, JSON_PATH)
-    print(f"Aliases have been successfully saved to {JSON_PATH}")
+    save_aliases_to_json(aliases, ALIASES_JSON_PATH)
+    print(f"Aliases have been successfully saved to {ALIASES_JSON_PATH}")
 
 
 if __name__ == "__main__":
