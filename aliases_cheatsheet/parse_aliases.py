@@ -2,18 +2,19 @@
 Parse aliases module.
 """
 
-import json
 from pathlib import Path
 
+from . import lib
 from .config import ALIASES_JSON_PATH
 
 
-def parse_bash_aliases(file_path):
-    aliases = []
+def parse_bash_aliases(file_path: Path):
     with file_path.open("r") as file:
         lines = file.readlines()
 
+    aliases = []
     comment_lines = []
+
     for line in lines:
         line = line.strip()
 
@@ -26,13 +27,13 @@ def parse_bash_aliases(file_path):
             alias_definition = parts[1].strip("'")
             comment = "\n".join(comment_lines) if comment_lines else ""
 
-            aliases.append(
-                {
-                    "alias": alias_name,
-                    "definition": alias_definition,
-                    "comment": comment,
-                }
-            )
+            item = {
+                "alias": alias_name,
+                "definition": alias_definition,
+                "comment": comment,
+            }
+            aliases.append(item)
+
             comment_lines = []
         elif not line:
             # Reset comment lines if there's a blank line
@@ -41,19 +42,13 @@ def parse_bash_aliases(file_path):
     return aliases
 
 
-def save_aliases_to_json(aliases, output_file):
-    with output_file.open("w") as json_file:
-        json.dump(aliases, json_file, indent=4)
-
-
 def main():
     home_directory = Path.home()
 
     aliases_file = home_directory / ".aliases"
 
     aliases = parse_bash_aliases(aliases_file)
-    save_aliases_to_json(aliases, ALIASES_JSON_PATH)
-    print(f"Aliases have been successfully saved to {ALIASES_JSON_PATH}")
+    lib.save_aliases_to_json(aliases, ALIASES_JSON_PATH)
 
 
 if __name__ == "__main__":
