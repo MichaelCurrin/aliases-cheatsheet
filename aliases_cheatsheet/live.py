@@ -6,11 +6,10 @@ Interactive terminal view of your aliases.
 
 import curses
 
-
 from prettytable import PrettyTable
 
-from .config import ALIASES_JSON_PATH
 from . import lib
+from .config import ALIASES_JSON_PATH
 
 
 data = lib.load_json(ALIASES_JSON_PATH)
@@ -22,7 +21,7 @@ def create_table(
     """
     Create a PrettyTable with filtered data.
 
-    :param data: List of dictionaries representing the data.
+    :param table_data: List of dictionaries representing the data.
     :param query: Query string used for filtering.
     :param max_width: Maximum width for each column.
 
