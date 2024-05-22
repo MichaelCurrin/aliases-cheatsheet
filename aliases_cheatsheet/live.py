@@ -1,3 +1,9 @@
+"""
+Live view.
+
+Interactive terminal view of your aliases.
+"""
+
 import curses
 import json
 
