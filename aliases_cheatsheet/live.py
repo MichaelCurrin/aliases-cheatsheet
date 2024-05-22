@@ -3,10 +3,10 @@ import json
 
 from prettytable import PrettyTable
 
-from .config import JSON_PATH
+from .config import ALIASES_JSON_PATH
 
 
-json_file_path = JSON_PATH
+json_file_path = ALIASES_JSON_PATH
 
 
 # TODO add text like about, and ESC to exit
