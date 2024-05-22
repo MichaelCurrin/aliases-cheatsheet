@@ -5,25 +5,19 @@ Interactive terminal view of your aliases.
 """
 
 import curses
-import json
+
 
 from prettytable import PrettyTable
 
 from .config import ALIASES_JSON_PATH
+from . import lib
 
 
-json_file_path = ALIASES_JSON_PATH
-
-
-# TODO add text like about, and ESC to exit
-# TODO handle keyboard interrupt gracefully.
-
-with open(json_file_path, "r") as file:
-    data = json.load(file)
+data = lib.load_json(ALIASES_JSON_PATH)
 
 
 def create_table(
-    data: list[dict[str, str]], query: str, max_width: int = 20
+    table_data: list[dict[str, str]], query: str, max_width: int = 20
 ) -> PrettyTable:
     """
     Create a PrettyTable with filtered data.
@@ -35,17 +29,21 @@ def create_table(
     :return: PrettyTable object containing filtered data.
     """
     table = PrettyTable()
-    if data and isinstance(data, list):
-        column_names = data[0].keys()
-        table.field_names = column_names
 
-        for column in column_names:
-            table.max_width[column] = max_width
-            table.align[column] = "l"
+    if not (table_data and isinstance(table_data, list)):
+        print("Warning: No data found to process")
+        return table
 
-        for item in data:
-            if query.lower() in str(item).lower():
-                table.add_row(item.values())
+    column_names = table_data[0].keys()
+    table.field_names = column_names
+
+    for column in column_names:
+        table.max_width[column] = max_width
+        table.align[column] = "l"
+
+    for item in table_data:
+        if query.lower() in str(item).lower():
+            table.add_row(item.values())
 
     return table
 
