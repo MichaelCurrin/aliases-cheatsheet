@@ -6,6 +6,13 @@ import json
 from pathlib import Path
 
 
+def load_json(json_file_path: Path):
+    with open(json_file_path, "r") as file:
+        data = json.load(file)
+
+    return data
+
+
 def save_aliases_to_json(aliases: dict, output_file: Path) -> None:
     """
     Save parsed aliases to a JSON file.
