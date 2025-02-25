@@ -10,21 +10,19 @@ from . import lib
 from .config import ALIASES_JSON_PATH
 
 
-def main() -> None:
+def display(aliases_data: list[dict], max_width: int = 60) -> None:
     """
-    Main command-line entry-point.
+    Display input data as a table.
     """
-    aliases_data = lib.load_json(ALIASES_JSON_PATH)
-
-    table = PrettyTable()
-
-    # In VS Code terminal, the width seems not respected, so set one.
-    max_width = 60
-
     if not aliases_data:
         print("No data found")
+        return
+
     if not isinstance(aliases_data, list):
         print("Data must be a list of dict objects")
+        return
+
+    table = PrettyTable()
 
     column_names = aliases_data[0].keys()
     table.field_names = column_names
@@ -37,6 +35,14 @@ def main() -> None:
         table.add_row(item.values())
 
     print(table)
+
+
+def main() -> None:
+    """
+    Main command-line entry-point.
+    """
+    aliases_data = lib.load_json(ALIASES_JSON_PATH)
+    display(aliases_data)
 
 
 if __name__ == "__main__":
