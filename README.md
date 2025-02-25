@@ -1,5 +1,5 @@
 # Personal Aliases Cheatsheet
-> Make your Bash and Git aliases easy to view and search
+> View and search your Bash and Git aliases easily with a CLI tool and web app
 
 [![GitHub tag](https://img.shields.io/github/tag/MichaelCurrin/aliases-cheatsheet?include_prereleases=&sort=semver&color=blue)](https://github.com/MichaelCurrin/aliases-cheatsheet/releases/)
 [![License](https://img.shields.io/badge/License-MIT-blue)](#license)
