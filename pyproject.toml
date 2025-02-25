@@ -1,15 +1,14 @@
 [project]
 name = "aliases-cheatsheet"
 version = "0.1.0"
-description = ""
+description = "View and search your Bash and Git aliases easily with a CLI tool and web app"
 authors = [
   { name = "Michael Currin", email = "18750745+MichaelCurrin@users.noreply.github.com" },
 ]
-license = { text = "Make your Bash and Git aliases easy to view and search" }
+license = { text = "MIT" }
 readme = "README.md"
 requires-python = ">=3.13"
 dependencies = ["prettytable (==3.10)"]
-
 
 [build-system]
 requires = ["poetry-core>=2.0.0,<3.0.0"]
