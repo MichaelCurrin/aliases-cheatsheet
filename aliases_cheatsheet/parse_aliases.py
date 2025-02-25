@@ -9,7 +9,7 @@ from .config import ALIASES_JSON_PATH
 
 
 def parse_bash_aliases(file_path: Path):
-    with file_path.open("r") as file:
+    with file_path.open("r", encoding="utf-8") as file:
         lines = file.readlines()
 
     aliases = []
