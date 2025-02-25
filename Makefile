@@ -1,43 +1,37 @@
 SHELL = /bin/bash
 APP_DIR = aliases_cheatsheet
 
-default: install install-dev
+default: install
+
+all: hooks install typecheck
 
 
 install:
-	pip install pip --upgrade
-	pip install -r requirements.txt
+	poetry install
 
-install-dev:
-	pip install -r requirements-dev.txt
+upgrade:
+	poetry update
 
 
-fmt:
-	black .
-	isort .
-
-fmt-check:
-	black . --diff --check
-	isort . --diff --check-only
-
-pretty:
-	npx prettier -w assets/{js,css} index.html
+fix:
+	poetry run ruff check --fix
+	poetry run ruff format
 
 
 parse:
 	# TODO check this approach in my template repo
-	python -m aliases_cheatsheet.parse_aliases
-	python -m aliases_cheatsheet.parse_git_config
+	poetry run python -m aliases_cheatsheet.parse_aliases
+	poetry run python -m aliases_cheatsheet.parse_git_config
 
 cli:
-	python -m aliases_cheatsheet.cli
+	poetry run python -m aliases_cheatsheet.cli
 
 cli-scroll:
-	python -m aliases_cheatsheet.cli | less
+	poetry run python -m aliases_cheatsheet.cli | less
 
 live:
-	python -m aliases_cheatsheet.live
+	poetry run python -m aliases_cheatsheet.live
 
 
 serve:
-	cd $(APP_DIR)/www && python -m http.server
+	cd $(APP_DIR)/www && python3 -m http.server
