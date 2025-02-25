@@ -11,8 +11,7 @@ from prettytable import PrettyTable
 from . import lib
 from .config import ALIASES_JSON_PATH
 
-
-data = lib.load_json(ALIASES_JSON_PATH)
+KEY_ESCAPE = 27
 
 
 def create_table(
@@ -53,17 +52,19 @@ def curses_app(stdscr) -> None:
 
     :param stdscr: Standard screen object provided by curses.
     """
+    data = lib.load_json(ALIASES_JSON_PATH)
+
     curses.curs_set(1)
     stdscr.nodelay(1)
     stdscr.timeout(100)
 
     query = ""
-    cursor_pos = 0  # Initialize cursor position
-
+    cursor_pos = 0
     while True:
         stdscr.clear()
         height, width = stdscr.getmaxyx()
         stdscr.addstr(0, 0, "Filter: " + query[: width - 8])
+        stdscr.addstr(1, 0, "To exit, press ESC")
 
         max_width = width // len(data[0].keys())
         table = create_table(data, query, max_width=(max_width - 2))
@@ -96,7 +97,7 @@ def curses_app(stdscr) -> None:
         if key in (curses.KEY_BACKSPACE, 127):
             query = query[:-1]
             cursor_pos = 0  # Reset cursor when filter changes
-        elif key == 27:  # ESC key to exit
+        elif key == KEY_ESCAPE:
             break
         elif key == curses.KEY_DOWN:
             cursor_pos = min(
@@ -109,4 +110,5 @@ def curses_app(stdscr) -> None:
             cursor_pos = 0  # Reset cursor when filter changes
 
 
-curses.wrapper(curses_app)
+if __name__ == "__main__":
+    curses.wrapper(curses_app)
