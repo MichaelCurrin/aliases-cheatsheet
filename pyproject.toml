@@ -1,6 +1,6 @@
 [project]
 name = "aliases-cheatsheet"
-version = "0.1.0"
+version = "0.2.0"
 description = "View and search your Bash and Git aliases easily with a CLI tool and web app"
 authors = [
   { name = "Michael Currin", email = "18750745+MichaelCurrin@users.noreply.github.com" },
