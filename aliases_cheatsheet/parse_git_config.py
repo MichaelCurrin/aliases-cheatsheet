@@ -1,5 +1,5 @@
 """
-Parse Git aliases from .gitconfig file.
+Parse Git config module.
 """
 
 import configparser

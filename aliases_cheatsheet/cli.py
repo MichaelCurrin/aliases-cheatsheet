@@ -10,7 +10,10 @@ from . import lib
 from .config import ALIASES_JSON_PATH
 
 
-def main():
+def main() -> None:
+    """
+    Main command-line entry-point.
+    """
     aliases_data = lib.load_json(ALIASES_JSON_PATH)
 
     table = PrettyTable()

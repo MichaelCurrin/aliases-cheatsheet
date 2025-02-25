@@ -1,5 +1,5 @@
 """
-Parse aliases module.
+Parse Bash aliases module.
 """
 
 from pathlib import Path
@@ -36,7 +36,7 @@ def parse_bash_aliases(file_path: Path):
 
             comment_lines = []
         elif not line:
-            # Reset comment lines if there's a blank line
+            # Reset comment lines if there's a blank line.
             comment_lines = []
 
     return aliases
