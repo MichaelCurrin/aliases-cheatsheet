@@ -29,9 +29,7 @@ def is_printable(key: int) -> bool:
     return 32 <= key <= 126
 
 
-def create_table(
-    table_data: list[dict[str, str]], query: str, max_width: int = 20
-) -> PrettyTable:
+def create_table(table_data: list[dict[str, str]], query: str) -> PrettyTable:
     """
     Create a PrettyTable with filtered data.
 
@@ -50,8 +48,20 @@ def create_table(
     column_names = table_data[0].keys()
     table.field_names = column_names
 
+    min_width_alias = max(len(item.get("alias", "")) for item in table_data)
+    min_width_definition = max(len(item.get("definition", "")) for item in table_data)
+    min_width_comment = max(len(item.get("comment", "")) for item in table_data)
+
+    # Use the widest value for each column to set the min width and keep
+    # it after filtering. But still set a lower bound so a high min doesn't go off the screen.
+    table.min_width["alias"] = table.max_width["alias"] = min(min_width_alias, 20)
+    table.min_width["definition"] = min(min_width_definition, 30)
+    table.min_width["comment"] = min(min_width_comment, 60)
+
+    table.max_width["definition"] = 40
+    table.max_width["comment"] = 80
+
     for column in column_names:
-        table.max_width[column] = max_width
         table.align[column] = "l"
 
     for item in table_data:
@@ -124,8 +134,7 @@ def curses_app(stdscr: curses.window) -> None:
         )
 
         row = aliases_data[0]
-        max_width = width // len(row.keys())
-        table = create_table(aliases_data, query, max_width=(max_width - 2))
+        table = create_table(aliases_data, query)
         table_str = str(table).split("\n")
 
         display_table(stdscr, table_str, width, height, cursor_pos, query)
