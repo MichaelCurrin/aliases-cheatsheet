@@ -100,7 +100,7 @@ def curses_app(stdscr: curses.window) -> None:
     data = lib.load_json(ALIASES_JSON_PATH)
 
     curses.curs_set(1)
-    stdscr.nodelay(1)
+    stdscr.nodelay(True)
     stdscr.timeout(100)
 
     query = ""
