@@ -17,6 +17,9 @@ fix:
 	poetry run ruff check --fix
 	poetry run ruff format
 
+typecheck:
+	poetry run mypy $(APP_DIR)
+
 
 parse:
 	# TODO check this approach in my template repo
@@ -33,5 +36,5 @@ live:
 	poetry run python -m aliases_cheatsheet.live
 
 
-serve:
+s serve:
 	cd $(APP_DIR)/www && python3 -m http.server
