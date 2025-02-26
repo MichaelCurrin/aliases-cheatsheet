@@ -5,13 +5,17 @@ Interactive terminal view of your aliases.
 """
 
 import curses
+import curses.ascii
 
 from prettytable import PrettyTable
 
 from . import lib
 from .config import ALIASES_JSON_PATH
 
-KEY_ESCAPE = 27
+
+ESCAPE = curses.ascii.ESC
+
+INPUT_TEXT_LABEL = "Filter:"
 
 
 def is_printable(key: int) -> bool:
@@ -88,7 +92,7 @@ def display_table(
             value = table_str[i + cursor_pos + header_lines][:width]
             stdscr.addstr(i + 2 + header_lines, 0, value)
 
-    stdscr.move(0, len("Filter: " + query))
+    stdscr.move(0, len(f"{INPUT_TEXT_LABEL} {query}"))
 
 
 def curses_app(stdscr: curses.window) -> None:
@@ -97,7 +101,7 @@ def curses_app(stdscr: curses.window) -> None:
 
     :param stdscr: Standard screen object provided by curses.
     """
-    data = lib.load_json(ALIASES_JSON_PATH)
+    aliases_data = lib.load_json(ALIASES_JSON_PATH)
 
     curses.curs_set(1)
     stdscr.nodelay(True)
@@ -105,26 +109,35 @@ def curses_app(stdscr: curses.window) -> None:
 
     query = ""
     cursor_pos = 0
+    key = -1
 
     while True:
         stdscr.clear()
         height, width = stdscr.getmaxyx()
-        stdscr.addstr(0, 0, "Filter: " + query[: width - 8])
-        stdscr.addstr(1, 0, "To exit, press ESC")
+        stdscr.addstr(0, 0, f"{INPUT_TEXT_LABEL} {query[: width - 8]}")
 
-        max_width = width // len(data[0].keys())
-        table = create_table(data, query, max_width=(max_width - 2))
+        current_char = chr(key) if key != -1 else ""
+        stdscr.addstr(
+            1,
+            0,
+            f"To exit, press ESC or CTRL+C. DEBUG INFO current key: {key} {current_char}",
+        )
+
+        row = aliases_data[0]
+        max_width = width // len(row.keys())
+        table = create_table(aliases_data, query, max_width=(max_width - 2))
         table_str = str(table).split("\n")
 
         display_table(stdscr, table_str, width, height, cursor_pos, query)
 
         stdscr.refresh()
+
         key = stdscr.getch()
 
         if key in (curses.KEY_BACKSPACE, 127):
             query = query[:-1]
             cursor_pos = 0
-        elif key == KEY_ESCAPE:
+        elif key == ESCAPE:
             break
         elif key == curses.KEY_DOWN:
             cursor_pos = min(cursor_pos + 1, len(table_str) - 3 - 3)
@@ -136,4 +149,7 @@ def curses_app(stdscr: curses.window) -> None:
 
 
 if __name__ == "__main__":
-    curses.wrapper(curses_app)
+    try:
+        curses.wrapper(curses_app)
+    except KeyboardInterrupt:
+        pass
