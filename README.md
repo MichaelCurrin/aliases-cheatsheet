@@ -4,6 +4,8 @@
 [![GitHub tag](https://img.shields.io/github/tag/MichaelCurrin/aliases-cheatsheet?include_prereleases=&sort=semver&color=blue)](https://github.com/MichaelCurrin/aliases-cheatsheet/releases/)
 [![License](https://img.shields.io/badge/License-MIT-blue)](#license)
 
+[![OS - Linux](https://img.shields.io/badge/OS-Linux-blue?logo=linux&logoColor=white)](https://www.linux.org/ "Go to Linux homepage")
+[![OS - macOS](https://img.shields.io/badge/OS-macOS-blue?logo=apple&logoColor=white)](https://www.apple.com/macos/ "Go to Apple homepage")
 [![Made with Python](https://img.shields.io/badge/Python-3x-blue?logo=python&logoColor=white)](https://python.org "Go to Python homepage")
 [![Made with Poetry](https://img.shields.io/badge/Poetry-2x-blue?logo=poetry&logoColor=white)](https://python.org "Go to Poetry homepage")
 
