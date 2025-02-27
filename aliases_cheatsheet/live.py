@@ -35,7 +35,6 @@ def create_table(table_data: list[dict[str, str]], query: str) -> PrettyTable:
 
     :param table_data: List of dictionaries representing the data.
     :param query: Query string used for filtering.
-    :param max_width: Maximum width for each column.
 
     :return: PrettyTable object containing filtered data.
     """
@@ -48,21 +47,12 @@ def create_table(table_data: list[dict[str, str]], query: str) -> PrettyTable:
     column_names = table_data[0].keys()
     table.field_names = column_names
 
-    min_width_alias = max(len(item.get("alias", "")) for item in table_data)
-    min_width_definition = max(len(item.get("definition", "")) for item in table_data)
-    min_width_comment = max(len(item.get("comment", "")) for item in table_data)
-
-    # Use the widest value for each column to set the min width and keep
-    # it after filtering. But still set a lower bound so a high min doesn't go off the screen.
-    table.min_width["alias"] = table.max_width["alias"] = min(min_width_alias, 20)
-    table.min_width["definition"] = min(min_width_definition, 30)
-    table.min_width["comment"] = min(min_width_comment, 60)
-
-    table.max_width["definition"] = 40
-    table.max_width["comment"] = 80
-
     for column in column_names:
         table.align[column] = "l"
+
+    table.min_width["alias"] = table.max_width["alias"] = 20
+    table.min_width["definition"] = table.max_width["definition"] = 50
+    table.min_width["comment"] = table.max_width["comment"] = 90
 
     for item in table_data:
         if query.lower() in str(item).lower():
